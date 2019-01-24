@@ -52,11 +52,15 @@ public class AdminRegister extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private String gender;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_register);
+        
+        societySpinnerInitializer();
+        
         chooseImage = findViewById(R.id.imageChooseButton);
         registerAdmin = findViewById(R.id.registerAdminButton);
         imageView = findViewById(R.id.adminImagePreview);
@@ -103,13 +107,54 @@ public class AdminRegister extends AppCompatActivity {
                     adminBean.setPassword(password.getText().toString());
                     adminBean.setPhoneNumber(Long.parseLong(phone.getText().toString()));
                     adminBean.setGender(gender);
-                    adminBean.setCommunityID("defaultCommunityID");
+                    
+                    String spinnerValue = spinner.getSelectedItem().toString();
+                    Query query = myRef.child("community").orderByChild("societyName").equalTo(spinnerValue);
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                String key = child.getKey();
+                                adminBean.setCommunityID(key);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    
                     uploadImage(imageId,adminBean);
 
 
                 }else{
                     Message.message(getApplicationContext(),"Password and Confirm Password didn't matched");
                 }
+
+            }
+        });
+    }
+    
+    private void societySpinnerInitializer() {
+        myRef.child("community").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final ArrayList<String> societyList = new ArrayList<>();
+                for (DataSnapshot addressSnapshot : dataSnapshot.getChildren()) {
+                    String societyName = addressSnapshot.child("societyName").getValue(String.class);
+                    if (societyName != null) {
+                        societyList.add(societyName);
+                    }
+                }
+                spinner = (Spinner) findViewById(R.id.spinner);
+                ArrayAdapter<String> societyAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, societyList);
+                societyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(societyAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
