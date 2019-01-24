@@ -14,6 +14,17 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <TextView
+            android:id="@+id/textViewSociety"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please select your societ from the below list"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        
         <EditText
             android:id="@+id/adminName"
             android:layout_width="match_parent"
