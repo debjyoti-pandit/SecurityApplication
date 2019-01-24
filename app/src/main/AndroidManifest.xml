@@ -12,14 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".AdminDashboard"
-            android:label="@string/title_activity_admin_dashboard"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".OwnerDashboard"
-            android:label="@string/title_activity_owner_dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".VisitorsPass"></activity>
+        <activity android:name=".AdminDashboard" />
+        <activity android:name=".OwnerDashboard" />
         <activity android:name=".AdminRegister" />
         <activity android:name=".MainActivity">
             <intent-filter>

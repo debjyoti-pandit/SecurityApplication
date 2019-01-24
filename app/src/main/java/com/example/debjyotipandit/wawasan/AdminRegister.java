@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,8 +25,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -34,6 +39,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import bean.AdminBean;
@@ -58,9 +64,9 @@ public class AdminRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_register);
-        
+
         societySpinnerInitializer();
-        
+
         chooseImage = findViewById(R.id.imageChooseButton);
         registerAdmin = findViewById(R.id.registerAdminButton);
         imageView = findViewById(R.id.adminImagePreview);
@@ -99,7 +105,7 @@ public class AdminRegister extends AppCompatActivity {
                 if(confirmPassword.getText().toString().equals(password.getText().toString())){
                     String imageId = UUID.randomUUID().toString();
 
-                    AdminBean adminBean = new AdminBean();
+                    final AdminBean adminBean = new AdminBean();
                     adminBean.setAddress(address.getText().toString());
                     adminBean.setEmail(email.getText().toString());
                     adminBean.setImageID(imageId);
@@ -107,9 +113,10 @@ public class AdminRegister extends AppCompatActivity {
                     adminBean.setPassword(password.getText().toString());
                     adminBean.setPhoneNumber(Long.parseLong(phone.getText().toString()));
                     adminBean.setGender(gender);
-                    
+
                     String spinnerValue = spinner.getSelectedItem().toString();
-                    Query query = myRef.child("community").orderByChild("societyName").equalTo(spinnerValue);
+
+                    Query query = mDatabase.child("community").orderByChild("societyName").equalTo(spinnerValue);
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -124,7 +131,7 @@ public class AdminRegister extends AppCompatActivity {
 
                         }
                     });
-                    
+
                     uploadImage(imageId,adminBean);
 
 
@@ -135,9 +142,9 @@ public class AdminRegister extends AppCompatActivity {
             }
         });
     }
-    
+
     private void societySpinnerInitializer() {
-        myRef.child("community").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("community").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final ArrayList<String> societyList = new ArrayList<>();
@@ -148,7 +155,7 @@ public class AdminRegister extends AppCompatActivity {
                     }
                 }
                 spinner = (Spinner) findViewById(R.id.spinner);
-                ArrayAdapter<String> societyAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, societyList);
+                ArrayAdapter<String> societyAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, societyList);
                 societyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(societyAdapter);
             }

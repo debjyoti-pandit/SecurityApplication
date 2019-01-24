@@ -55,30 +55,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     Message.message(getApplicationContext(),getString(R.string.errorSelectSpinner));
                 }else {
                     emailPassMatched();
-//                  if(emailPassMatched()){
-//                        Intent intent;
-//                        switch (spinnerSelected){
-//                            case "Owner" :
-//                                intent = new Intent(getApplicationContext(),OwnerDashboard.class);
-//                                startActivity(intent);
-//                                finish();
-//                                break;
-//                            case  "Admin" :
-//                                intent = new Intent(getApplicationContext(),AdminDashboard.class);
-//                                startActivity(intent);
-//                                finish();
-//                                break;
-//                            case "Security Gaurd" :
-//                                intent = new Intent(getApplicationContext(),OwnerDashboard.class);
-//                                startActivity(intent);
-//                                finish();
-//                                break;
-//                            default:
-//                                Message.message(getApplicationContext(),getString(R.string.errorSelectSpinner));
-//                        }
-//                    }else {
-//                        Message.message(getApplicationContext(),getString(R.string.errorlogin));
-//                    }
                 }
             }
         });
@@ -86,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminRegister.class);
+                Intent intent = new Intent(getApplicationContext(), VisitorsPass.class);
                 startActivity(intent);
             }
         });

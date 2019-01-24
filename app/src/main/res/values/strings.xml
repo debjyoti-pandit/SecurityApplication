@@ -18,9 +18,12 @@
     <string name="errorImageupload">Failed to upload your image, Please try again</string>
     <string name="imageUploadSuccess">Image uploaded successfully</string>
     <string name="passMismatch">Email and Password didnt match</string>
+    <string name="dateFormatWrong">Please enter date in correct format</string>
+    <string name="timeFormatWrong">Please enter time in correct format</string>
 
     <string name="communityCollectionName">community</string>
     <string name="adminCollectionName">admin</string>
+    <string name="visitorsCollectionName">visitors</string>
 
     <string-array name="roleArray">
         <item>--Select--</item>
