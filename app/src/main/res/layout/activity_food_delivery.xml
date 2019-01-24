@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodDelivery">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="5dp">
+
+        <EditText
+            android:id="@+id/orderNumber"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="@string/orderNumber"
+            android:fontFamily="sans-serif"
+            android:hint="@string/orderNumber"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/orderMerchant"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="@string/orderMerchant"
+            android:fontFamily="sans-serif"
+            android:hint="@string/orderMerchant"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/foodIntime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/foodInTime"
+            android:ems="10"
+            android:hint="@string/foodInTime"
+            android:inputType="time"
+            android:selectAllOnFocus="false" />
+
+        <EditText
+            android:id="@+id/foodInDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/foodInDate"
+            android:ems="10"
+            android:hint="@string/foodInDate"
+            android:inputType="date" />
+
+        <CheckBox
+            android:id="@+id/leave_at_gate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/leaveAtTheGate" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dropAtDoor" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
