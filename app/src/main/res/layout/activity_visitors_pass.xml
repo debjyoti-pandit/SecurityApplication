@@ -76,6 +76,30 @@
             android:layout_height="wrap_content"
             android:text="Generate Pass Key" />
 
+        <TextView
+            android:id="@+id/visitorsMatched"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="OTP matched"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/visitorsNotMatched"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="Sorry OTP didn't matched"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
     </LinearLayout>
 
 

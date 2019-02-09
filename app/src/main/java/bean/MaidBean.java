@@ -1,4 +1,5 @@
-package com.example.firebaseapplication;
+package bean;
+
 
 import java.io.Serializable;
 
@@ -10,6 +11,9 @@ public class MaidBean implements Serializable {
     private String password;
     private String address;
     private String uniqueCode;
+
+    public MaidBean() {
+    }
 
     public String getOwnerId() {
         return ownerId;

@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import bean.AdminBean;
 import bean.Message;
+import bean.OwnerBean;
+import bean.SecurityGaurd;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -62,8 +64,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), VisitorsPass.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterOption.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -72,13 +75,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String role = null;
         switch (spinnerSelected) {
             case "Owner":
-                role = getString(R.string.communityCollectionName);
+                role = getString(R.string.ownersCollectionName);
                 break;
             case "Admin":
                 role = getString(R.string.adminCollectionName);
                 break;
             case "Security Gaurd":
-                role = getString(R.string.communityCollectionName);
+                role = getString(R.string.securityCollectionName);
                 break;
             default:
                 Message.message(getApplicationContext(), getString(R.string.errorSelectSpinner));
@@ -88,14 +91,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AdminBean adminBean;
-                Message.message(getApplicationContext(),"Before printing key");
-                Message.message(getApplicationContext(),dataSnapshot.getKey());
+                OwnerBean ownerBean;
+                SecurityGaurd securityGaurd;
+//                Message.message(getApplicationContext(),"Before printing key");
+//                Message.message(getApplicationContext(),dataSnapshot.getKey());
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    Message.message(getApplicationContext(),"Before printing key");
-                    Message.message(getApplicationContext(),singleSnapshot.getKey());
+//                    Message.message(getApplicationContext(),"Before printing key");
+//                    Message.message(getApplicationContext(),singleSnapshot.getKey());
                     switch (spinnerSelected) {
                         case "Owner":
-                            adminBean = singleSnapshot.getValue(AdminBean.class);
+                            ownerBean = singleSnapshot.getValue(OwnerBean.class);
+                            if(ownerBean.getEmail().equals(email.getText().toString()) && ownerBean.getPassword().equals(password.getText().toString())){
+                                Intent intent = new Intent(getApplicationContext(),OwnerDashboard.class);
+                                intent.putExtra("sessionData",ownerBean);
+                                startActivity(intent);
+                                finish();
+                            }else {
+                                Message.message(getApplicationContext(),getString(R.string.passMismatch));
+                            }
                             break;
                         case "Admin":
                             adminBean = singleSnapshot.getValue(AdminBean.class);
@@ -111,7 +124,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
                             break;
                         case "Security Gaurd":
-                            adminBean = singleSnapshot.getValue(AdminBean.class);
+                            securityGaurd = singleSnapshot.getValue(SecurityGaurd.class);
+                            if(securityGaurd.getEmail().equals(email.getText().toString()) && securityGaurd.getPassword().equals(password.getText().toString())){
+                                Intent intent = new Intent(getApplicationContext(),SecurityGaurdDashboard.class);
+                                intent.putExtra("sessionData",securityGaurd);
+                                startActivity(intent);
+                                finish();
+                            }else {
+                                Message.message(getApplicationContext(),getString(R.string.passMismatch));
+                            }
                             break;
                     }
                 }

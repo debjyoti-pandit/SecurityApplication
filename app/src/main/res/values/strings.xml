@@ -24,6 +24,10 @@
     <string name="communityCollectionName">community</string>
     <string name="adminCollectionName">admin</string>
     <string name="visitorsCollectionName">visitors</string>
+    <string name="ownersCollectionName">owner</string>
+    <string name="securityCollectionName">securityGaurd</string>
+    <string name="maidCollectionName">maid</string>
+    <string name="foodDelCollectionName">foodDelivery</string>
 
     <string-array name="roleArray">
         <item>--Select--</item>

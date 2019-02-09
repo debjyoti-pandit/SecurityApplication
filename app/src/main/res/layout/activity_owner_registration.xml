@@ -9,13 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/textViewSociety"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please select your societ from the below list"/>
+            android:text="Please select your societ from the below list" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -24,44 +25,45 @@
 
         <EditText
             android:id="@+id/editTextName"
-            android:hint="Enter full name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="Enter full name" />
 
         <EditText
             android:id="@+id/editTextEmail"
-            android:hint="Enter emailID"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="Enter emailID" />
 
 
         <EditText
             android:id="@+id/editTextPhoneNumber"
-            android:hint="Enter phone number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Enter phone number"
             android:inputType="phone" />
 
         <TextView
             android:id="@+id/textViewGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter your gender"/>
+            android:text="Enter your gender" />
 
         <RadioGroup
             android:id="@+id/radioSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Male"
-                android:checked="true" />
+                android:checked="true"
+                android:text="Male" />
 
             <RadioButton
                 android:id="@+id/radioFemale"
@@ -73,53 +75,53 @@
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:hint="Enter password"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Enter password"
             android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/editTextFlatNumber"
-            android:hint="Enter flat number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="Enter flat number" />
 
         <EditText
             android:id="@+id/editTextBlockNumber"
-            android:hint="Enter block number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="Enter block number" />
 
         <EditText
             android:id="@+id/editTextAddress"
-            android:hint="Enter address"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="Enter address" />
 
         <EditText
             android:id="@+id/editTextVehicleId"
-            android:hint="Enter vehicle number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="Enter vehicle number" />
 
         <EditText
             android:id="@+id/editTextParkingId"
-            android:hint="Enter parking number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="Enter parking number" />
 
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="registerController"
-            android:text="Next" />
+            android:text="Register" />
 
     </LinearLayout>
 

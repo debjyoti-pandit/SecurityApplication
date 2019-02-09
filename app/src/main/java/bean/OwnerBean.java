@@ -1,4 +1,5 @@
-package com.example.firebaseapplication;
+package bean;
+
 
 import java.io.Serializable;
 

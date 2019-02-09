@@ -1,4 +1,4 @@
-package com.example.firebaseapplication;
+package com.example.debjyotipandit.wawasan;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import bean.MaidBean;
+import bean.OwnerBean;
+import bean.SendTextMessage;
+
 public class MaidRegistrationActivity extends AppCompatActivity {
 
     private OwnerBean sessionData;
@@ -34,16 +38,23 @@ public class MaidRegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maid_registration);
+        initialize();
         initSessionData();
+        btnDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                maidRegisterController(v);
+            }
+        });
     }
 
     private void initialize() {
-        editTextName = (EditText) findViewById(R.id.maidEditTextName);
-        editTextPhoneNumber = (EditText) findViewById(R.id.maidEditTextPhoneNumber);
-        editTextPassword = (EditText) findViewById(R.id.maidEditTextPassword);
-        editTextAddress = (EditText) findViewById(R.id.maidEditTextAddress);
-        radioSexGroup = (RadioGroup) findViewById(R.id.maidRadioSex);
-        btnDisplay = (Button) findViewById(R.id.submit);
+        editTextName = findViewById(R.id.maidEditTextName);
+        editTextPhoneNumber = findViewById(R.id.maidEditTextPhoneNumber);
+        editTextPassword = findViewById(R.id.maidEditTextPassword);
+        editTextAddress = findViewById(R.id.maidEditTextAddress);
+        radioSexGroup = findViewById(R.id.maidRadioSex);
+        btnDisplay = findViewById(R.id.maidRegistrationButton);
     }
 
     private void initSessionData() {
@@ -54,13 +65,13 @@ public class MaidRegistrationActivity extends AppCompatActivity {
     public void maidRegisterController(View view) {
         int selectedId = radioSexGroup.getCheckedRadioButtonId();
         radioSexButton = (RadioButton) findViewById(selectedId);
+        final int randomNumber = SendTextMessage.getRandom();
         final MaidBean newMaid = new MaidBean(editTextName.getText().toString(),
                 radioSexButton.getText().toString(),
                 editTextPhoneNumber.getText().toString(),
                 editTextPassword.getText().toString(),
                 editTextAddress.getText().toString(),
-                "021121");
-
+                String.valueOf(randomNumber));
         Query query = myRef.child("owner").orderByChild("flatNumber").equalTo(sessionData.getFlatNumber());
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -72,17 +83,17 @@ public class MaidRegistrationActivity extends AppCompatActivity {
                     newMaid.setOwnerId(key);
                     Toast.makeText(MaidRegistrationActivity.this, "Key: "+newMaid.getOwnerId(), Toast.LENGTH_SHORT).show();
                     myRef.child("maid").push().setValue(newMaid);
+
+                    SendTextMessage.sendMessage("Please show the OTP while entering: "+String.valueOf(randomNumber),editTextPhoneNumber.getText().toString(),getApplicationContext());
+                    Intent intent = new Intent(getApplicationContext(),OwnerDashboard.class);
+                    startActivity(intent);
                     finish();
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
-
     }
 }

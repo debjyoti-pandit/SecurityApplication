@@ -1,4 +1,4 @@
-package com.example.firebaseapplication;
+package com.example.debjyotipandit.wawasan;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import bean.OwnerBean;
+
 public class OwnerRegistrationActivity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -42,24 +44,24 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_owner_registration);
         initialize();
         societySpinnerInitializer();
     }
 
 
     private void initialize() {
-        editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPhoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        editTextFlatNumber = (EditText) findViewById(R.id.editTextFlatNumber);
-        editTextBlockNumber = (EditText) findViewById(R.id.editTextBlockNumber);
-        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
-        editTextVehicleId = (EditText) findViewById(R.id.editTextVehicleId);
-        editTextParkingId = (EditText) findViewById(R.id.editTextParkingId);
-        radioSexGroup = (RadioGroup) findViewById(R.id.radioSex);
-        btnDisplay = (Button) findViewById(R.id.submit);
+        editTextName = findViewById(R.id.editTextName);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextFlatNumber = findViewById(R.id.editTextFlatNumber);
+        editTextBlockNumber = findViewById(R.id.editTextBlockNumber);
+        editTextAddress = findViewById(R.id.editTextAddress);
+        editTextVehicleId = findViewById(R.id.editTextVehicleId);
+        editTextParkingId = findViewById(R.id.editTextParkingId);
+        radioSexGroup = findViewById(R.id.radioSex);
+        btnDisplay = findViewById(R.id.submit);
     }
 
     private void societySpinnerInitializer() {
@@ -113,9 +115,12 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
                     newOwner.setCommunityId(key);
                     Toast.makeText(OwnerRegistrationActivity.this, "Key: "+newOwner.getCommunityId(), Toast.LENGTH_SHORT).show();
                     myRef.child("owner").push().setValue(newOwner);
-                    Intent intent = new Intent(getBaseContext(), OwnerDashboard.class);
-                    intent.putExtra("sessionData",newOwner);
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
+//                    Intent intent = new Intent(getBaseContext(), OwnerDashboard.class);
+//                    intent.putExtra("sessionData",newOwner);
+//                    startActivity(intent);
                     //insert intent for successfull login here
                 }
             }

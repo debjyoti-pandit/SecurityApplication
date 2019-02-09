@@ -2,9 +2,7 @@ package com.example.debjyotipandit.wawasan;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -15,16 +13,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,9 +29,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -50,7 +41,7 @@ public class AdminRegister extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 10;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private StorageReference imagesRef = mStorageRef.child("images");
-    private Button registerAdmin,chooseImage;
+    private Button registerAdmin,chooseImage, addCommunity;
     private ImageView imageView;
     private Uri filePath;
     private EditText name, address, email, phone, password, confirmPassword;
@@ -79,6 +70,16 @@ public class AdminRegister extends AppCompatActivity {
         confirmPassword = findViewById(R.id.adminConfirmPassword);
         radioGroup = findViewById(R.id.adminRadioGroup);
 
+        addCommunity = findViewById(R.id.adminAddCommunity);
+        addCommunity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),CommunityRegistration.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -102,41 +103,45 @@ public class AdminRegister extends AppCompatActivity {
         registerAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(confirmPassword.getText().toString().equals(password.getText().toString())){
-                    String imageId = UUID.randomUUID().toString();
-
-                    final AdminBean adminBean = new AdminBean();
-                    adminBean.setAddress(address.getText().toString());
-                    adminBean.setEmail(email.getText().toString());
-                    adminBean.setImageID(imageId);
-                    adminBean.setName(name.getText().toString());
-                    adminBean.setPassword(password.getText().toString());
-                    adminBean.setPhoneNumber(Long.parseLong(phone.getText().toString()));
-                    adminBean.setGender(gender);
-
-                    String spinnerValue = spinner.getSelectedItem().toString();
-
-                    Query query = mDatabase.child("community").orderByChild("societyName").equalTo(spinnerValue);
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                String key = child.getKey();
-                                adminBean.setCommunityID(key);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-                    uploadImage(imageId,adminBean);
-
-
+                if(name.getText().toString().length() == 0 || password.getText().toString().length() == 0 || email.getText().toString().length() == 0){
+                    Message.message(getApplicationContext(),"Please fill all the details.");
                 }else{
-                    Message.message(getApplicationContext(),"Password and Confirm Password didn't matched");
+                    if(confirmPassword.getText().toString().equals(password.getText().toString())){
+                        String imageId = UUID.randomUUID().toString();
+
+                        final AdminBean adminBean = new AdminBean();
+                        adminBean.setAddress(address.getText().toString());
+                        adminBean.setEmail(email.getText().toString());
+                        adminBean.setImageID(imageId);
+                        adminBean.setName(name.getText().toString());
+                        adminBean.setPassword(password.getText().toString());
+                        adminBean.setPhoneNumber(Long.parseLong(phone.getText().toString()));
+                        adminBean.setGender(gender);
+
+                        String spinnerValue = spinner.getSelectedItem().toString();
+
+                        Query query = mDatabase.child("community").orderByChild("societyName").equalTo(spinnerValue);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                    String key = child.getKey();
+                                    adminBean.setCommunityID(key);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        uploadImage(imageId,adminBean);
+
+
+                    }else{
+                        Message.message(getApplicationContext(),"Password and Confirm Password didn't matched");
+                    }
                 }
 
             }

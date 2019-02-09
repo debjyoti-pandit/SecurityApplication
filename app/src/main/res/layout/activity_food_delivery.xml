@@ -58,17 +58,30 @@
             android:hint="@string/foodInDate"
             android:inputType="date" />
 
-        <CheckBox
-            android:id="@+id/leave_at_gate"
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/foodDeliveryRadioGrp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/leaveAtTheGate" />
+            android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/checkBox2"
+            <RadioButton
+                android:id="@+id/foodDelGateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave at the gate" />
+
+            <RadioButton
+                android:id="@+id/foodDelDoorBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/foodDeliveryBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dropAtDoor" />
+            android:text="Save" />
 
     </LinearLayout>
 

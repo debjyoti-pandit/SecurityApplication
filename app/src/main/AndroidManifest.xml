@@ -12,10 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VisitorsPass"></activity>
+        <activity android:name=".SecurityVisitorsOTP"></activity>
+        <activity android:name=".SecurityMaidOTP" />
+        <activity android:name=".SecurityFoodDelOTP" />
+        <activity android:name=".SecurityGaurdDashboard" />
+        <activity android:name=".RegisterOption" />
+        <activity android:name=".VisitorsPass" />
         <activity android:name=".AdminDashboard" />
         <activity android:name=".OwnerDashboard" />
         <activity android:name=".AdminRegister" />
+        <activity android:name=".OwnerRegistrationActivity" />
+        <activity android:name=".MaidRegistrationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

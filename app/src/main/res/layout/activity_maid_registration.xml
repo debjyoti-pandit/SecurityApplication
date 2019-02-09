@@ -9,48 +9,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <EditText
             android:id="@+id/maidEditTextName"
-            android:hint="Enter full name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="Enter full name" />
 
         <EditText
             android:id="@+id/maidEditTextAddress"
-            android:hint="Enter emailID"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="Enter emailID" />
 
 
         <EditText
             android:id="@+id/maidEditTextPhoneNumber"
-            android:hint="Enter phone number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Enter phone number"
             android:inputType="phone" />
 
         <TextView
             android:id="@+id/textViewGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter your gender"/>
+            android:text="Enter your gender" />
 
         <RadioGroup
             android:id="@+id/maidRadioSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/maidRadioMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Male"
-                android:checked="true" />
+                android:checked="true"
+                android:text="Male" />
 
             <RadioButton
                 android:id="@+id/maidRadioFemale"
@@ -62,18 +64,18 @@
 
         <EditText
             android:id="@+id/maidEditTextPassword"
-            android:hint="Enter password"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Enter password"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/maidRegistrationButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"
-            android:onClick="maidRegisterController"/>
+            android:onClick="maidRegisterController"
+            android:text="Add Maid" />
 
     </LinearLayout>
 

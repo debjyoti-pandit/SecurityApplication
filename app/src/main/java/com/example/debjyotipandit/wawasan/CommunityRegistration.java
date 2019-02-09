@@ -1,5 +1,6 @@
 package com.example.debjyotipandit.wawasan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,9 @@ public class CommunityRegistration extends AppCompatActivity {
                 communityBean.setNoOfFlats(Integer.parseInt(societyExitGates.getText().toString()));
                 communityBean.setNoOFExitGates(Integer.parseInt(societyFlats.getText().toString()));
                 addCommunityToDb(communityBean);
+                Intent intent = new Intent(getApplicationContext(), AdminRegister.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

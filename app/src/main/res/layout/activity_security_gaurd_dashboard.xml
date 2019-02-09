@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecurityGaurdDashboard">
+
+    <Button
+        android:id="@+id/sgVisitors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="For Visitors"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <Button
+        android:id="@+id/sgFoodDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="102dp"
+        android:text="For food delivery"
+        app:layout_constraintTop_toBottomOf="@+id/sgVisitors"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <Button
+        android:id="@+id/sgMaidOTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="101dp"
+        android:text="For maid"
+        app:layout_constraintTop_toBottomOf="@+id/sgFoodDelivery"
+        tools:layout_editor_absoluteX="161dp" />
+</android.support.constraint.ConstraintLayout>

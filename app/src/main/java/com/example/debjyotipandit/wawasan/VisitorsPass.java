@@ -1,5 +1,6 @@
 package com.example.debjyotipandit.wawasan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import bean.CommunityBean;
 import bean.Message;
 import bean.SendTextMessage;
 import bean.VisitorBean;
@@ -53,6 +50,9 @@ public class VisitorsPass extends AppCompatActivity {
                     visitorBean.setOtpGenerated(SendTextMessage.getRandom());
                     SendTextMessage.sendMessage(formResponse(visitorBean),String.valueOf(visitorBean.getMobileNumber()),getApplicationContext());
                     addVisitorsToDb(visitorBean);
+                    Intent i = new Intent(getApplicationContext(),OwnerDashboard.class);
+                    startActivity(i);
+                    finish();
                 } catch (ParseException e) {
                     Message.message(getApplicationContext(),getText(R.string.dateFormatWrong).toString());
                 }

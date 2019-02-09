@@ -43,10 +43,10 @@
             android:id="@+id/registerTV"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:text="Register"
+            android:text="New users register here"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
 
